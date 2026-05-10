@@ -1041,16 +1041,16 @@
       <div class="form-row">
         <div class="form-field">
           <label>Your Name</label>
-          <input type="text" placeholder="e.g. Rahul Sharma">
+          <input id="fName" type="text" placeholder="e.g. Rahul Sharma">
         </div>
         <div class="form-field">
           <label>Phone Number</label>
-          <input type="tel" placeholder="e.g. 9876543210">
+          <input id="fPhone" type="tel" placeholder="e.g. 9876543210">
         </div>
       </div>
       <div class="form-field">
         <label>Service Required</label>
-        <select>
+        <select id="fService">
           <option value="">Select a service...</option>
           <option>Passport / Visa Photo</option>
           <option>Wedding Shoot</option>
@@ -1064,7 +1064,7 @@
       </div>
       <div class="form-field">
         <label>Message</label>
-        <textarea placeholder="Tell us about your requirements..."></textarea>
+        <textarea id="fMsg" placeholder="Tell us about your requirements..."></textarea>
       </div>
       <button class="btn-submit" onclick="handleSubmit(this)">Send Message →</button>
     </div>
@@ -1074,7 +1074,7 @@
 <!-- MAP -->
 <div class="map-section">
   <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.1684290766!2d77.49987867550015!3d28.47498629161499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cebee6a98d3db%3A0x62bff0f6d64c1e8b!2sKrishna%20Apra%20Plaza%2C%20Alpha%20I%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201310!5e0!3m2!1sen!2sin!4v1716000000000!5m2!1sen!2sin"
+    src="https://maps.google.com/maps?q=28.4706971,77.5104683&z=17&hl=en&output=embed"
     loading="lazy"
     referrerpolicy="no-referrer-when-downgrade"
     title="Noida Click Studio Location">
@@ -1134,12 +1134,41 @@
   }, { threshold: 0.1 });
   reveals.forEach(r => io.observe(r));
 
-  // Form submit
+  // Form submit → WhatsApp
   function handleSubmit(btn) {
-    btn.textContent = '✓ Message Sent!';
-    btn.style.background = '#22c55e';
+    const name    = document.getElementById('fName').value.trim();
+    const phone   = document.getElementById('fPhone').value.trim();
+    const service = document.getElementById('fService').value.trim();
+    const msg     = document.getElementById('fMsg').value.trim();
+
+    if (!name || !phone) {
+      document.getElementById('fName').style.borderColor  = name  ? 'var(--border)' : 'tomato';
+      document.getElementById('fPhone').style.borderColor = phone ? 'var(--border)' : 'tomato';
+      return;
+    }
+
+    const text = `Hello Noida Click Studio! 👋\n\n` +
+      `*Name:* ${name}\n` +
+      `*Phone:* ${phone}\n` +
+      (service ? `*Service:* ${service}\n` : '') +
+      (msg     ? `*Message:* ${msg}\n`     : '') +
+      `\nI found you via your website.`;
+
+    const waUrl = `https://wa.me/918860008850?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank');
+
+    btn.textContent = '✓ Opening WhatsApp…';
+    btn.style.background = '#25d366';
     btn.style.color = 'white';
-    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+      btn.style.color = '';
+      document.getElementById('fName').value  = '';
+      document.getElementById('fPhone').value = '';
+      document.getElementById('fService').value = '';
+      document.getElementById('fMsg').value   = '';
+    }, 3000);
   }
 
   // Nav scroll effect
