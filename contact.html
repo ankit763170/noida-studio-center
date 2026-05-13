@@ -166,6 +166,32 @@
   .footer-bottom p { font-size: 0.78rem; }
 
   /* WhatsApp FAB */
+  .website-fab { position: fixed; bottom: 100px; right: 28px; z-index: 200; }
+  .website-fab-btn { background: var(--dark); color: white; border: none; padding: 12px 18px; border-radius: 50px; font-family: 'Inter',sans-serif; font-weight: 700; font-size: 0.78rem; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 8px; transition: all 0.25s; white-space: nowrap; animation: fabPop 0.5s ease 1.5s both; }
+  .website-fab-btn:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,151,10,0.35); }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: white; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.25); animation: modalIn 0.3s ease; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.93) translateY(16px)} to{opacity:1;transform:none} }
+  .modal-header { background: var(--dark); padding: 24px 28px; border-radius: 20px 20px 0 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .modal-header-text h3 { font-family: 'Playfair Display',serif; font-size: 1.3rem; font-weight: 900; color: white; margin-bottom: 4px; }
+  .modal-header-text h3 span { color: #f0b429; font-style: italic; }
+  .modal-header-text p { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+  .modal-close { background: rgba(255,255,255,0.1); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+  .modal-close:hover { background: rgba(255,255,255,0.2); }
+  .modal-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 14px; }
+  .wm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .wm-field { display: flex; flex-direction: column; gap: 5px; }
+  .wm-field label { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-600); font-weight: 700; }
+  .wm-field input, .wm-field select, .wm-field textarea { background: var(--gray-50); border: 1.5px solid var(--border); color: var(--dark); padding: 11px 13px; font-family: 'Inter',sans-serif; font-size: 0.88rem; outline: none; border-radius: 8px; transition: border-color 0.2s; resize: none; }
+  .wm-field input:focus, .wm-field select:focus, .wm-field textarea:focus { border-color: var(--gold); background: white; box-shadow: 0 0 0 3px rgba(212,151,10,0.1); }
+  .wm-field textarea { height: 85px; }
+  .wm-field input::placeholder, .wm-field textarea::placeholder { color: var(--gray-400); }
+  .modal-perks { display: flex; gap: 10px; flex-wrap: wrap; padding: 0 28px 4px; }
+  .modal-perk { font-size: 0.75rem; font-weight: 600; color: var(--gray-600); background: var(--gray-50); border: 1px solid var(--border); padding: 5px 12px; border-radius: 100px; }
+  .modal-footer-note { padding: 0 28px 24px; font-size: 0.75rem; color: var(--gray-400); text-align: center; }
+  .modal-footer-note a { color: var(--gold); text-decoration: none; font-weight: 600; }
+  @media (max-width: 480px) { .wm-row { grid-template-columns: 1fr; } }
   .whatsapp-fab { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 20px rgba(37,211,102,0.4); z-index: 200; transition: transform 0.2s; animation: fabPop 0.5s ease 1s both; }
   @keyframes fabPop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
   .whatsapp-fab:hover { transform: scale(1.1); }
@@ -373,12 +399,86 @@
   </div>
 </footer>
 
+<div class="website-fab">
+  <button class="website-fab-btn" onclick="openWebModal()">🌐 Get a Website</button>
+</div>
+
+<div class="modal-overlay" id="webModal" onclick="closeOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h3>Need a <span>Website?</span></h3>
+        <p>Tell us what you need — we'll get back within 24 hrs</p>
+      </div>
+      <button class="modal-close" onclick="closeWebModal()">✕</button>
+    </div>
+    <div class="modal-perks">
+      <div class="modal-perk">⚡ 3–7 day delivery</div>
+      <div class="modal-perk">📱 Mobile-ready</div>
+      <div class="modal-perk">💰 Affordable</div>
+      <div class="modal-perk">🔍 SEO-ready</div>
+    </div>
+    <div class="modal-body">
+      <div class="wm-row">
+        <div class="wm-field"><label>Your Name *</label><input id="wmName" type="text" placeholder="e.g. Rahul Sharma"></div>
+        <div class="wm-field"><label>Phone / WhatsApp *</label><input id="wmPhone" type="tel" placeholder="e.g. 9876543210"></div>
+      </div>
+      <div class="wm-field"><label>Type of Website</label>
+        <select id="wmType">
+          <option value="">Select type...</option>
+          <option>Business / Shop Landing Page</option>
+          <option>Portfolio Website</option>
+          <option>E-Commerce Store</option>
+          <option>Restaurant / Food Menu</option>
+          <option>Real Estate Listing Site</option>
+          <option>School / Institute Website</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="wm-field"><label>Budget Range</label>
+        <select id="wmBudget">
+          <option value="">Select budget...</option>
+          <option>Under ₹5,000</option>
+          <option>₹5,000 – ₹15,000</option>
+          <option>₹15,000 – ₹30,000</option>
+          <option>₹30,000+</option>
+          <option>Let's discuss</option>
+        </select>
+      </div>
+      <div class="wm-field"><label>Tell us more</label>
+        <textarea id="wmMsg" placeholder="Describe your business, what pages/features you need..."></textarea>
+      </div>
+      <button class="btn-submit" style="align-self:stretch;border-radius:8px;" onclick="submitWebModal(this)">
+        Send via WhatsApp →
+      </button>
+    </div>
+    <div class="modal-footer-note">Built by <a href="https://www.ankitjha.online/" target="_blank">Ankit Jha</a> · <a href="https://www.ankitjha.online/" target="_blank">View Portfolio</a></div>
+  </div>
+</div>
+
 <a href="https://wa.me/918860008850?text=Hello%20Noida%20Click%20Studio%2C%20I%20would%20like%20to%20book%20a%20session." class="whatsapp-fab" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
 <script>
   function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  function openWebModal()  { document.getElementById('webModal').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeWebModal() { document.getElementById('webModal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeOnOverlay(e) { if(e.target===document.getElementById('webModal')) closeWebModal(); }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeWebModal(); });
+  function submitWebModal(btn) {
+    const name=document.getElementById('wmName').value.trim(), phone=document.getElementById('wmPhone').value.trim(),
+          type=document.getElementById('wmType').value.trim(), budget=document.getElementById('wmBudget').value.trim(),
+          msg=document.getElementById('wmMsg').value.trim();
+    document.getElementById('wmName').style.borderColor=name?'':'tomato';
+    document.getElementById('wmPhone').style.borderColor=phone?'':'tomato';
+    if(!name||!phone) return;
+    const text=`Hello Ankit! 👋 I need a website built.\n\n*Name:* ${name}\n*Phone:* ${phone}\n`+(type?`*Website Type:* ${type}\n`:'')+(budget?`*Budget:* ${budget}\n`:'')+(msg?`*Details:* ${msg}\n`:'')+`\nFound you via Noida Click Studio.`;
+    window.open(`https://wa.me/917631706350?text=${encodeURIComponent(text)}`,'_blank');
+    btn.textContent='✓ Redirecting to WhatsApp…'; btn.style.background='#25d366';
+    setTimeout(()=>{ closeWebModal(); btn.textContent='Send via WhatsApp →'; btn.style.background=''; ['wmName','wmPhone','wmMsg'].forEach(id=>document.getElementById(id).value=''); document.getElementById('wmType').value=''; document.getElementById('wmBudget').value=''; },2000);
+  }
 
   // ── Google Apps Script endpoint ──────────────────────────────────────────
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycby4Ho2GR0ZC8sci2gIeKr5vdvCDG-G7DjEcmBjVkAwC2fVQDugaO4B9Aw27ny9x3wvB/exec';
