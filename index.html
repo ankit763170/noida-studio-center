@@ -208,6 +208,24 @@
   .gallery-pill:hover { background: rgba(212,151,10,0.2); color: white; border-color: rgba(212,151,10,0.4); }
   .pill-dot { width: 7px; height: 7px; background: var(--gold-light); border-radius: 50%; flex-shrink: 0; }
 
+  /* CREATE WEBSITE SECTION */
+  .website-section { padding: 100px 80px; background: var(--dark); }
+  .website-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+  .website-perks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .perk { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .perk span { font-size: 1.1rem; }
+  .website-section .section-label { color: var(--gold-light); }
+  .website-section .section-title { color: white; }
+  .website-form-card { background: white; border-radius: 16px; padding: 32px; box-shadow: var(--shadow-lg); }
+  .wf-body { display: flex; flex-direction: column; gap: 14px; }
+  .wf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .wf-field { display: flex; flex-direction: column; gap: 5px; }
+  .wf-field label { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-600); font-weight: 600; }
+  .wf-field input, .wf-field select, .wf-field textarea { background: var(--gray-50); border: 1.5px solid var(--border); color: var(--dark); padding: 11px 13px; font-family: 'Inter',sans-serif; font-size: 0.88rem; outline: none; border-radius: 7px; transition: border-color 0.2s; resize: none; }
+  .wf-field input:focus, .wf-field select:focus, .wf-field textarea:focus { border-color: var(--gold); background: white; }
+  .wf-field textarea { height: 88px; }
+  .wf-field input::placeholder, .wf-field textarea::placeholder { color: var(--gray-400); }
+
   /* CTA */
   .cta-section { padding: 100px 80px; background: linear-gradient(135deg, var(--gold-pale) 0%, #fff 60%); text-align: center; }
   .cta-inner { max-width: 640px; margin: 0 auto; }
@@ -246,6 +264,9 @@
     .services-preview, .why-us { padding: 60px 24px; }
     .why-grid { grid-template-columns: 1fr; gap: 40px; }
     .why-visual-wrap { display: none; }
+    .website-section { padding: 60px 24px; }
+    .website-inner { grid-template-columns: 1fr; gap: 40px; }
+    .wf-row { grid-template-columns: 1fr; }
     .cta-section { padding: 70px 24px; }
     footer { padding: 50px 24px 24px; }
     .footer-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -394,6 +415,69 @@
   </div>
 </section>
 
+<!-- CREATE WEBSITE SECTION -->
+<section class="website-section">
+  <div class="website-inner">
+    <div class="website-left reveal">
+      <div class="section-label">Web Development</div>
+      <h2 class="section-title">Need a <span>Website</span><br>for Your Business?</h2>
+      <p style="color:var(--gray-600);font-size:0.92rem;line-height:1.75;margin-bottom:28px;">
+        Get a professional, fast & mobile-ready website built by the same developer behind this site.
+        From simple landing pages to full business portals — at budget-friendly rates.
+      </p>
+      <div class="website-perks">
+        <div class="perk"><span>⚡</span> Delivered in 3–7 days</div>
+        <div class="perk"><span>📱</span> Mobile responsive</div>
+        <div class="perk"><span>🔍</span> SEO-ready</div>
+        <div class="perk"><span>💰</span> Affordable pricing</div>
+      </div>
+      <a href="https://www.ankitjha.online/" target="_blank" class="btn-primary" style="display:inline-block;margin-top:28px;text-decoration:none;">
+        View Developer Portfolio →
+      </a>
+    </div>
+    <div class="website-right reveal">
+      <div class="website-form-card">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:6px;">Request a Website Quote</h3>
+        <p style="font-size:0.82rem;color:var(--gray-600);margin-bottom:22px;">Fill in your details — we'll get back to you within 24 hours.</p>
+        <div class="wf-body">
+          <div class="wf-row">
+            <div class="wf-field"><label>Your Name *</label><input id="wfName" type="text" placeholder="e.g. Rahul Sharma"></div>
+            <div class="wf-field"><label>Phone / WhatsApp *</label><input id="wfPhone" type="tel" placeholder="e.g. 9876543210"></div>
+          </div>
+          <div class="wf-field"><label>Type of Website</label>
+            <select id="wfType">
+              <option value="">Select type...</option>
+              <option>Business / Shop Landing Page</option>
+              <option>Portfolio Website</option>
+              <option>E-Commerce Store</option>
+              <option>Restaurant / Food Menu</option>
+              <option>Real Estate Listing Site</option>
+              <option>School / Institute Website</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="wf-field"><label>Budget Range</label>
+            <select id="wfBudget">
+              <option value="">Select budget...</option>
+              <option>Under ₹5,000</option>
+              <option>₹5,000 – ₹15,000</option>
+              <option>₹15,000 – ₹30,000</option>
+              <option>₹30,000+</option>
+              <option>Let's discuss</option>
+            </select>
+          </div>
+          <div class="wf-field"><label>Tell us more</label>
+            <textarea id="wfMsg" placeholder="Describe your business, what you need on the website..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%;border:none;cursor:pointer;font-family:'Inter',sans-serif;" onclick="submitWebsiteForm(this)">
+            Send Request via WhatsApp →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-section">
   <div class="cta-inner">
     <div class="section-label centered">Ready to Book?</div>
@@ -428,6 +512,7 @@
   <div class="footer-bottom">
     <p>© 2026 Noida Click Studio. All rights reserved.</p>
     <p>G-23, Krishna Apra Plaza, Alpha-1, Greater Noida – 201310</p>
+    <p style="color:rgba(255,255,255,0.35)">Designed &amp; built by <a href="https://www.ankitjha.online/" target="_blank" style="color:var(--gold-light);text-decoration:none;font-weight:600;">Ankit Jha</a></p>
   </div>
 </footer>
 
@@ -437,6 +522,47 @@
 
 <script>
   function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  const WF_SHEET_URL = 'https://script.google.com/macros/s/AKfycby4Ho2GR0ZC8sci2gIeKr5vdvCDG-G7DjEcmBjVkAwC2fVQDugaO4B9Aw27ny9x3wvB/exec';
+
+  function submitWebsiteForm(btn) {
+    const name   = document.getElementById('wfName').value.trim();
+    const phone  = document.getElementById('wfPhone').value.trim();
+    const type   = document.getElementById('wfType').value.trim();
+    const budget = document.getElementById('wfBudget').value.trim();
+    const msg    = document.getElementById('wfMsg').value.trim();
+
+    document.getElementById('wfName').style.borderColor  = name  ? '' : 'tomato';
+    document.getElementById('wfPhone').style.borderColor = phone ? '' : 'tomato';
+    if (!name || !phone) return;
+
+    // Save to Google Sheet
+    fetch(WF_SHEET_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, service: 'Website: ' + (type || 'General'), budget, message: msg,
+                             timestamp: new Date().toLocaleString('en-IN') })
+    }).catch(() => {});
+
+    // Open WhatsApp
+    const text = `Hello Ankit! 👋 I need a website built.\n\n*Name:* ${name}\n*Phone:* ${phone}\n` +
+      (type   ? `*Website Type:* ${type}\n`   : '') +
+      (budget ? `*Budget:* ${budget}\n`        : '') +
+      (msg    ? `*Details:* ${msg}\n`          : '') +
+      `\nI found you via Noida Click Studio website.`;
+    window.open(`https://wa.me/917631706350?text=${encodeURIComponent(text)}`, '_blank');
+
+    btn.textContent = '✓ Opening WhatsApp…';
+    btn.style.background = '#25d366';
+    setTimeout(() => {
+      btn.textContent = 'Send Request via WhatsApp →';
+      btn.style.background = '';
+      ['wfName','wfPhone','wfMsg'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('wfType').value = '';
+      document.getElementById('wfBudget').value = '';
+    }, 3000);
+  }
+
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); io.unobserve(e.target); } });
