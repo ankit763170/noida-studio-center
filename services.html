@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Noida Click Studio – Greater Noida</title>
+<meta name="description" content="All services offered by Noida Click Studio — passport photos, wedding shoots, fashion photography, document services, printing, lamination and more.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4970a;
+    --gold-light: #f0b429;
+    --gold-pale: #fef3c7;
+    --white: #ffffff;
+    --gray-50: #f8f9fa;
+    --gray-100: #f0f1f3;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #6b7280;
+    --gray-800: #1f2937;
+    --dark: #111827;
+    --border: #e5e7eb;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--dark); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 68px;
+    background: rgba(255,255,255,0.96); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: box-shadow 0.3s;
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 3px; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links a { color: var(--gray-600); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: all 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--dark); background: var(--gray-100); }
+  .nav-cta { background: var(--gold) !important; color: white !important; padding: 9px 22px !important; border-radius: 6px !important; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--dark); border-radius: 2px; display: block; }
+  .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; z-index: 99; flex-direction: column; gap: 4px; box-shadow: var(--shadow-md); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--gray-800); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 12px 8px; border-bottom: 1px solid var(--gray-100); }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 110px 80px 70px;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--gold-pale) 100%);
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,151,10,0.1), transparent 70%); pointer-events: none; }
+  .page-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 2; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 0.82rem; color: var(--gray-500); }
+  .breadcrumb a { color: var(--gold); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { color: var(--gray-400); }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 900; color: var(--dark); margin-bottom: 16px; }
+  .page-hero h1 span { color: var(--gold); font-style: italic; }
+  .page-hero p { color: var(--gray-600); font-size: 1rem; line-height: 1.75; max-width: 560px; }
+
+  /* FILTER TABS */
+  .filter-wrap { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 68px; z-index: 90; }
+  .filter-inner { max-width: 1240px; margin: 0 auto; padding: 0 80px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .filter-inner::-webkit-scrollbar { display: none; }
+  .filter-btn { background: none; border: none; padding: 18px 20px; font-family: 'Inter', sans-serif; font-size: 0.83rem; font-weight: 600; color: var(--gray-500); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .filter-btn:hover { color: var(--dark); }
+  .filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* SERVICES CATEGORIES */
+  .services-wrap { padding: 70px 80px 100px; max-width: 1240px; margin: 0 auto; }
+  .services-category { margin-bottom: 70px; }
+  .services-category:last-child { margin-bottom: 0; }
+  .category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .category-icon { width: 48px; height: 48px; background: var(--gold-pale); border: 1px solid rgba(212,151,10,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+  .category-header h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--dark); }
+  .category-header p { font-size: 0.85rem; color: var(--gray-500); margin-top: 2px; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .service-card {
+    background: var(--gray-50); border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px;
+    transition: all 0.3s; cursor: default; position: relative; overflow: hidden;
+  }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); background: white; border-color: rgba(212,151,10,0.25); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .card-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .card-name { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .card-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 16px; }
+  .card-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--gold-pale); color: var(--gold); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 100px; }
+  .card-num { position: absolute; top: 14px; right: 18px; font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: rgba(212,151,10,0.07); line-height: 1; pointer-events: none; }
+
+  /* PRICING INFO */
+  .pricing-note {
+    background: var(--gold-pale); border: 1px solid rgba(212,151,10,0.3); border-radius: 12px;
+    padding: 20px 24px; margin-top: 60px; display: flex; align-items: center; gap: 16px;
+  }
+  .pricing-note .icon { font-size: 1.6rem; }
+  .pricing-note p { font-size: 0.88rem; color: var(--gray-800); line-height: 1.6; }
+  .pricing-note strong { color: var(--gold); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    margin: 0 80px 100px; background: var(--dark); border-radius: 20px;
+    padding: 60px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,151,10,0.15), transparent 70%); pointer-events: none; }
+  .cta-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 10px; }
+  .cta-banner h3 span { color: var(--gold-light); font-style: italic; }
+  .cta-banner p { color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.6; }
+  .cta-banner-btns { display: flex; gap: 12px; flex-direction: column; min-width: 200px; }
+  .btn-white { background: white; color: var(--dark); padding: 13px 28px; text-decoration: none; font-weight: 700; font-size: 0.85rem; border-radius: 8px; transition: all 0.25s; display: block; text-align: center; }
+  .btn-white:hover { background: var(--gold-pale); }
+  .btn-outline-white { border: 1.5px solid rgba(255,255,255,0.3); color: white; padding: 13px 28px; text-decoration: none; font-weight: 600; font-size: 0.85rem; border-radius: 8px; transition: all 0.25s; display: block; text-align: center; }
+  .btn-outline-white:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 50px 80px 30px; color: rgba(255,255,255,0.6); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-logo-wrap .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: white; display: block; margin-bottom: 14px; }
+  .footer-logo-wrap .footer-logo span { color: var(--gold-light); }
+  .footer-logo-wrap p { font-size: 0.83rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { color: white; font-size: 0.82rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.83rem; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 0.78rem; }
+
+  /* WhatsApp FAB */
+  .whatsapp-fab { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 20px rgba(37,211,102,0.4); z-index: 200; transition: transform 0.2s, box-shadow 0.2s; animation: fabPop 0.5s ease 1s both; }
+  @keyframes fabPop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+  .whatsapp-fab:hover { transform: scale(1.1); }
+  .whatsapp-fab svg { width: 26px; height: 26px; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-hero { padding: 90px 24px 50px; }
+    .filter-inner { padding: 0 24px; }
+    .services-wrap { padding: 50px 24px 70px; }
+    .cta-banner { margin: 0 24px 70px; padding: 36px 24px; grid-template-columns: 1fr; }
+    .cta-banner-btns { flex-direction: row; flex-wrap: wrap; }
+    footer { padding: 50px 24px 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">NOIDA <span>CLICK</span> STUDIO</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Book Now / Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Services</span>
+    </div>
+    <h1>All Our <span>Services</span></h1>
+    <p>From a quick passport photo to a full wedding shoot — we've got you covered. Everything photography and document-related, under one roof in Alpha-1 Greater Noida.</p>
+  </div>
+</div>
+
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="filterCat('all', this)">All Services</button>
+    <button class="filter-btn" onclick="filterCat('photography', this)">Photography</button>
+    <button class="filter-btn" onclick="filterCat('id', this)">ID Photos</button>
+    <button class="filter-btn" onclick="filterCat('documents', this)">Documents & Print</button>
+    <button class="filter-btn" onclick="filterCat('travel', this)">Travel & Tickets</button>
+  </div>
+</div>
+
+<div class="services-wrap">
+
+  <!-- PHOTOGRAPHY SHOOTS -->
+  <div class="services-category" data-cat="photography">
+    <div class="category-header">
+      <div class="category-icon">🎞️</div>
+      <div>
+        <h2>Photography Shoots</h2>
+        <p>Professional studio & outdoor shoots for every occasion</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">01</span>
+        <span class="card-icon">💒</span>
+        <div class="card-name">Wedding Shoot</div>
+        <div class="card-desc">Capture every precious moment of your big day with cinematic storytelling. Indoor and outdoor setups available.</div>
+        <span class="card-tag">⭐ Most Popular</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">02</span>
+        <span class="card-icon">💑</span>
+        <div class="card-name">Pre-Wedding Shoot</div>
+        <div class="card-desc">Romantic and creative pre-wedding sessions at locations of your choice. Theme shoots available.</div>
+        <span class="card-tag">📅 Book in Advance</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">03</span>
+        <span class="card-icon">🎊</span>
+        <div class="card-name">Post Wedding Shoot</div>
+        <div class="card-desc">Relive your wedding memories with a relaxed, artistic post-wedding photography session.</div>
+        <span class="card-tag">✨ Special Package</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">04</span>
+        <span class="card-icon">👗</span>
+        <div class="card-name">Fashion Shoot</div>
+        <div class="card-desc">Editorial-grade fashion photography for models, portfolios, brands and personal projects.</div>
+        <span class="card-tag">🎨 Studio & Outdoor</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">05</span>
+        <span class="card-icon">🛍️</span>
+        <div class="card-name">Product Shoot</div>
+        <div class="card-desc">Clean, compelling product photography for e-commerce platforms, catalogues and advertising.</div>
+        <span class="card-tag">📦 Commercial</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">06</span>
+        <span class="card-icon">👔</span>
+        <div class="card-name">Corporate Shoot</div>
+        <div class="card-desc">Professional headshots, team photos and corporate event coverage for businesses.</div>
+        <span class="card-tag">💼 Business</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">07</span>
+        <span class="card-icon">🎉</span>
+        <div class="card-name">Special Occasion Shoot</div>
+        <div class="card-desc">Birthday, maternity, baby shower, anniversary and all other milestone occasion photography.</div>
+        <span class="card-tag">🥳 All Occasions</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ID PHOTOS -->
+  <div class="services-category" data-cat="id">
+    <div class="category-header">
+      <div class="category-icon">🪪</div>
+      <div>
+        <h2>ID & Passport Photos</h2>
+        <p>Government-compliant photos ready in minutes</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">08</span>
+        <span class="card-icon">📸</span>
+        <div class="card-name">Passport Size Photo</div>
+        <div class="card-desc">Instant, government-compliant passport photos in correct dimensions. Printed and ready in minutes.</div>
+        <span class="card-tag">⚡ Instant</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">09</span>
+        <span class="card-icon">✈️</span>
+        <div class="card-name">Visa Photo</div>
+        <div class="card-desc">Country-specific visa photos for USA, UK, Schengen, Canada, Australia and all other countries.</div>
+        <span class="card-tag">🌍 All Countries</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">10</span>
+        <span class="card-icon">🪙</span>
+        <div class="card-name">Coin-Size & Stamp-Size</div>
+        <div class="card-desc">Coin-size, stamp-size and custom-dimension photo prints for various official uses.</div>
+        <span class="card-tag">⚡ Instant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS & PRINT -->
+  <div class="services-category" data-cat="documents">
+    <div class="category-header">
+      <div class="category-icon">🖨️</div>
+      <div>
+        <h2>Documents & Printing</h2>
+        <p>All printing, lamination, binding and document services</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">11</span>
+        <span class="card-icon">💳</span>
+        <div class="card-name">Aadhar PVC Card</div>
+        <div class="card-desc">Durable, wallet-sized PVC Aadhar cards that last longer than paper printouts.</div>
+        <span class="card-tag">🔒 Official Quality</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">12</span>
+        <span class="card-icon">🆔</span>
+        <div class="card-name">PAN Card Services</div>
+        <div class="card-desc">PAN card application assistance, printouts and PVC PAN card services.</div>
+        <span class="card-tag">📋 Document Help</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">13</span>
+        <span class="card-icon">🖼️</span>
+        <div class="card-name">Photo Framing</div>
+        <div class="card-desc">Custom photo frames in all sizes for homes, offices, gifts and special occasions.</div>
+        <span class="card-tag">🎁 Gift Ready</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">14</span>
+        <span class="card-icon">📋</span>
+        <div class="card-name">Photocopy & Print</div>
+        <div class="card-desc">High-quality colour and B&W document printing, scanning and photocopying services.</div>
+        <span class="card-tag">🖨️ All Formats</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">15</span>
+        <span class="card-icon">✂️</span>
+        <div class="card-name">Lamination</div>
+        <div class="card-desc">Cold and hot lamination for certificates, IDs, photos and important documents.</div>
+        <span class="card-tag">🛡️ Protective</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">16</span>
+        <span class="card-icon">📚</span>
+        <div class="card-name">Spiral Binding</div>
+        <div class="card-desc">Professional spiral and comb binding for reports, presentations and project files.</div>
+        <span class="card-tag">📖 Professional</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAVEL & TICKETS -->
+  <div class="services-category" data-cat="travel">
+    <div class="category-header">
+      <div class="category-icon">🎫</div>
+      <div>
+        <h2>Travel & Online Services</h2>
+        <p>Tickets, online forms and passport application help</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">17</span>
+        <span class="card-icon">✈️</span>
+        <div class="card-name">Air Tickets</div>
+        <div class="card-desc">Online flight ticket booking for domestic and international routes. Quick and hassle-free.</div>
+        <span class="card-tag">🌐 Online Booking</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">18</span>
+        <span class="card-icon">🚂</span>
+        <div class="card-name">Train Tickets</div>
+        <div class="card-desc">IRCTC train ticket booking for all classes and routes across India.</div>
+        <span class="card-tag">🚄 All Classes</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">19</span>
+        <span class="card-icon">🚌</span>
+        <div class="card-name">Bus Tickets</div>
+        <div class="card-desc">Online bus ticket booking for inter-city travel across all major operators.</div>
+        <span class="card-tag">🗺️ All Routes</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">20</span>
+        <span class="card-icon">📝</span>
+        <div class="card-name">Online Forms</div>
+        <div class="card-desc">Assistance with filling government and private online forms, applications and registrations.</div>
+        <span class="card-tag">🤝 Assisted</span>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">21</span>
+        <span class="card-icon">🛂</span>
+        <div class="card-name">Passport Application</div>
+        <div class="card-desc">Help with new passport applications, renewal, Tatkaal forms and supporting documentation.</div>
+        <span class="card-tag">📄 Full Assistance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-note">
+    <div class="icon">💡</div>
+    <p><strong>Need a custom package or have a special requirement?</strong> Call us at <a href="tel:8860008850" style="color:var(--gold);font-weight:700">8860008850</a> or <a href="contact.html" style="color:var(--gold);font-weight:700">send us a message</a> — we're always happy to help and offer competitive pricing for bulk orders and recurring customers.</p>
+  </div>
+
+</div>
+
+<div class="cta-banner">
+  <div>
+    <h3>Ready to <span>Get Started?</span></h3>
+    <p>Walk into our studio at Alpha-1 Greater Noida or reach out to book a session. We're open 6 days a week.</p>
+  </div>
+  <div class="cta-banner-btns">
+    <a href="contact.html" class="btn-white">Book Now</a>
+    <a href="tel:8860008850" class="btn-outline-white">📞 Call Us</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo-wrap">
+      <span class="footer-logo">NOIDA <span>CLICK</span> STUDIO</span>
+      <p>Professional photography studio in Alpha-1 Greater Noida. Serving individuals, families and businesses since 2010.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:8860008850">📞 8860008850</a>
+      <a href="tel:9990710171">📞 9990710171</a>
+      <a href="mailto:noidaclickstudio@gmail.com">✉️ Email Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Noida Click Studio. All rights reserved.</p>
+    <p>G-23, Krishna Apra Plaza, Alpha-1, Greater Noida – 201310</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/918860008850?text=Hello%20Noida%20Click%20Studio%2C%20I%20would%20like%20to%20enquire%20about%20your%20services." class="whatsapp-fab" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.services-category').forEach(sec => {
+      if (cat === 'all' || sec.dataset.cat === cat) {
+        sec.style.display = '';
+        setTimeout(() => sec.style.opacity = '1', 10);
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => io.observe(r));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.12)' : '0 1px 3px rgba(0,0,0,0.08)';
+  });
+</script>
+</body>
+</html>
