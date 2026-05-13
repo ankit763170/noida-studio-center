@@ -493,36 +493,28 @@
     document.getElementById('fPhone').style.borderColor = phone ? '' : 'tomato';
     if (!name || !phone) return;
 
-    // Disable button while saving
-    btn.disabled = true;
-    btn.textContent = 'Saving…';
+    // 1️⃣ Open owner's WhatsApp immediately
+    const text = `Hello Noida Click Studio! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n` +
+      (service ? `*Service:* ${service}\n` : '') +
+      (msg     ? `*Message:* ${msg}\n`     : '') +
+      `\nI found you via your website.`;
+    window.open(`https://wa.me/918860008850?text=${encodeURIComponent(text)}`, '_blank');
 
-    // 1️⃣ Save to Google Sheet
+    // 2️⃣ Save to Google Sheet silently in the background
     fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, service, message: msg,
                              timestamp: new Date().toLocaleString('en-IN') })
-    })
-    .catch(() => {}) // no-cors always throws — that's fine, data still saves
-    .finally(() => {
-      // 2️⃣ Open WhatsApp after sheet is saved
-      const text = `Hello Noida Click Studio! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n` +
-        (service ? `*Service:* ${service}\n` : '') +
-        (msg     ? `*Message:* ${msg}\n`     : '') +
-        `\nI found you via your website.`;
-      window.open(`https://wa.me/918860008850?text=${encodeURIComponent(text)}`, '_blank');
+    }).catch(() => {});
 
-      btn.disabled = false;
-      btn.textContent = '✓ Sent! Opening WhatsApp…';
-      btn.style.background = '#25d366';
-      setTimeout(() => {
-        btn.textContent = 'Send via WhatsApp →';
-        btn.style.background = '';
-        ['fName','fPhone','fService','fMsg'].forEach(id => document.getElementById(id).value = '');
-      }, 3000);
-    });
+    btn.textContent = '✓ Opening WhatsApp…';
+    btn.style.background = '#25d366';
+    setTimeout(() => {
+      btn.textContent = 'Send via WhatsApp →';
+      btn.style.background = '';
+      ['fName','fPhone','fService','fMsg'].forEach(id => document.getElementById(id).value = '');
+    }, 3000);
   }
 
   const reveals = document.querySelectorAll('.reveal');
